@@ -1,0 +1,14 @@
+C:\Users\keywi\source\repos\Analisador Loteria\Analisador Loteria\bin\Debug\Analisador Loteria.exe.config
+C:\Users\keywi\source\repos\Analisador Loteria\Analisador Loteria\bin\Debug\Analisador Loteria.exe
+C:\Users\keywi\source\repos\Analisador Loteria\Analisador Loteria\bin\Debug\Analisador Loteria.pdb
+C:\Users\keywi\source\repos\Analisador Loteria\Analisador Loteria\bin\Debug\EPPlus.dll
+C:\Users\keywi\source\repos\Analisador Loteria\Analisador Loteria\bin\Debug\EPPlus.xml
+C:\Users\keywi\source\repos\Analisador Loteria\Analisador Loteria\obj\Debug\Analisador Loteria.csprojAssemblyReference.cache
+C:\Users\keywi\source\repos\Analisador Loteria\Analisador Loteria\obj\Debug\Analisador_Loteria.FormHomePage.resources
+C:\Users\keywi\source\repos\Analisador Loteria\Analisador Loteria\obj\Debug\Analisador_Loteria.FormLotofacil.resources
+C:\Users\keywi\source\repos\Analisador Loteria\Analisador Loteria\obj\Debug\Analisador_Loteria.Properties.Resources.resources
+C:\Users\keywi\source\repos\Analisador Loteria\Analisador Loteria\obj\Debug\Analisador Loteria.csproj.GenerateResource.cache
+C:\Users\keywi\source\repos\Analisador Loteria\Analisador Loteria\obj\Debug\Analisador Loteria.csproj.CoreCompileInputs.cache
+C:\Users\keywi\source\repos\Analisador Loteria\Analisador Loteria\obj\Debug\Analisador Loteria.csproj.CopyComplete
+C:\Users\keywi\source\repos\Analisador Loteria\Analisador Loteria\obj\Debug\Analisador Loteria.exe
+C:\Users\keywi\source\repos\Analisador Loteria\Analisador Loteria\obj\Debug\Analisador Loteria.pdb
