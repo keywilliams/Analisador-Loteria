@@ -177,7 +177,7 @@ namespace Analisador_Loteria
                 }
 
                 //Sum
-                var oldSum = sumList.Where(x => x.Item1.Equals(sumAll)).FirstOrDefault();
+                var oldSum = sumList.Where(x => x.Item1.Equals(sumAll.ToString())).FirstOrDefault();
                 if (oldSum != null)
                 {
                     var newLine = new Tuple<string, int>(oldSum.Item1, oldSum.Item2 + 1);
@@ -190,9 +190,28 @@ namespace Analisador_Loteria
                 }
             }
 
-            lineList = lineList.OrderByDescending(x => x.Item1).ToList();
-            columnList = columnList.OrderByDescending(x => x.Item1).ToList();
-            sumList = sumList.OrderByDescending(x => x.Item1).ToList();
+            lineList = lineList.OrderByDescending(x => x.Item2).ToList();
+            columnList = columnList.OrderByDescending(x => x.Item2).ToList();
+            sumList = sumList.OrderByDescending(x => x.Item2).ToList();
+        }
+
+        private void btnCarregarLocalPath_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (FolderBrowserDialog openFileDialog = new FolderBrowserDialog() { ShowNewFolderButton = true })
+                {
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        txtSaveFilePath.Text = openFileDialog.SelectedPath;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Mensagem", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
