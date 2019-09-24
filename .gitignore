@@ -1,0 +1,11 @@
+packages
+.vs
+.vscode
+bin
+obj
+wwwroot
+*.dbmdl
+*.sqlproj.user
+*.csproj.user
+*.jfm
+*.sqlproj.vspscc
