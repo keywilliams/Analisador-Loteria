@@ -65,7 +65,7 @@
             this.btnAnalisar.TabIndex = 2;
             this.btnAnalisar.Text = "Analisar";
             this.btnAnalisar.UseVisualStyleBackColor = true;
-            this.btnAnalisar.Click += new System.EventHandler(this.button1_Click);
+            this.btnAnalisar.Click += new System.EventHandler(this.btnAnalisar_Click);
             // 
             // txtSaveFilePath
             // 

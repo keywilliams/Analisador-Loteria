@@ -26,3 +26,18 @@ C:\Projetos GIT\Analisador-Loteria\Analisador Loteria\obj\Debug\Analisador Loter
 C:\Projetos GIT\Analisador-Loteria\Analisador Loteria\obj\Debug\Analisador Loteria.csproj.CopyComplete
 C:\Projetos GIT\Analisador-Loteria\Analisador Loteria\obj\Debug\Analisador Loteria.exe
 C:\Projetos GIT\Analisador-Loteria\Analisador Loteria\obj\Debug\Analisador Loteria.pdb
+C:\Users\C89597438\Source\Repos\keywilliams\Analisador-Loteria\Analisador Loteria\bin\Debug\Analisador Loteria.exe.config
+C:\Users\C89597438\Source\Repos\keywilliams\Analisador-Loteria\Analisador Loteria\bin\Debug\Analisador Loteria.exe
+C:\Users\C89597438\Source\Repos\keywilliams\Analisador-Loteria\Analisador Loteria\bin\Debug\Analisador Loteria.pdb
+C:\Users\C89597438\Source\Repos\keywilliams\Analisador-Loteria\Analisador Loteria\bin\Debug\EPPlus.dll
+C:\Users\C89597438\Source\Repos\keywilliams\Analisador-Loteria\Analisador Loteria\bin\Debug\EPPlus.xml
+C:\Users\C89597438\Source\Repos\keywilliams\Analisador-Loteria\Analisador Loteria\obj\Debug\Analisador Loteria.csproj.AssemblyReference.cache
+C:\Users\C89597438\Source\Repos\keywilliams\Analisador-Loteria\Analisador Loteria\obj\Debug\Analisador_Loteria.FormHomePage.resources
+C:\Users\C89597438\Source\Repos\keywilliams\Analisador-Loteria\Analisador Loteria\obj\Debug\Analisador_Loteria.FormLotofacil.resources
+C:\Users\C89597438\Source\Repos\keywilliams\Analisador-Loteria\Analisador Loteria\obj\Debug\Analisador_Loteria.Properties.Resources.resources
+C:\Users\C89597438\Source\Repos\keywilliams\Analisador-Loteria\Analisador Loteria\obj\Debug\Analisador Loteria.csproj.GenerateResource.cache
+C:\Users\C89597438\Source\Repos\keywilliams\Analisador-Loteria\Analisador Loteria\obj\Debug\Analisador Loteria.csproj.CoreCompileInputs.cache
+C:\Users\C89597438\Source\Repos\keywilliams\Analisador-Loteria\Analisador Loteria\obj\Debug\Analisador Loteria.csproj.CopyComplete
+C:\Users\C89597438\Source\Repos\keywilliams\Analisador-Loteria\Analisador Loteria\obj\Debug\Analisador Loteria.exe
+C:\Users\C89597438\Source\Repos\keywilliams\Analisador-Loteria\Analisador Loteria\obj\Debug\Analisador Loteria.pdb
+C:\Users\C89597438\Source\Repos\keywilliams\Analisador-Loteria\Analisador Loteria\obj\Debug\Analisador_Loteria.FormSummary.resources
