@@ -255,7 +255,7 @@ namespace Analisador_Loteria.Lotofacil
 
             string summary = $"***** SOMAS *****{Environment.NewLine}";
 
-            foreach (var line in sumList.OrderByDescending(x => x.Item2).ToList())
+            foreach (var line in sumList.OrderByDescending(x => x.Item1).ToList())
             {
                 summary = $"{summary}Soma {line.Item1} = {line.Item2}{Environment.NewLine}";
             }
@@ -313,6 +313,7 @@ namespace Analisador_Loteria.Lotofacil
         public static string PrimeNumberAnalysis(string[] allLines)
         {
             var primeNumberList = new List<Tuple<string, int>>();
+            primeNumberList.Add(new Tuple<string, int>("0", 0));
             primeNumberList.Add(new Tuple<string, int>("1", 0));
             primeNumberList.Add(new Tuple<string, int>("2", 0));
             primeNumberList.Add(new Tuple<string, int>("3", 0));
@@ -353,7 +354,57 @@ namespace Analisador_Loteria.Lotofacil
 
             foreach (var line in primeNumberList.OrderByDescending(x => x.Item1).ToList())
             {
-                summary = $"{summary}Total {line.Item1} = {line.Item2}{Environment.NewLine}";
+                summary = $"{summary}{line.Item1} Primos = {line.Item2}{Environment.NewLine}";
+            }
+
+            return summary;
+        }
+
+        public static string OddEvenAnalysis(string[] allLines)
+        {
+            var oddEvenList = new List<Tuple<string, int>>();
+
+            foreach (var line in allLines)
+            {
+                var balls = line.Split(new[] { ' ', '\t' }, StringSplitOptions.None);
+                int odd = 0;
+                int even = 0;
+
+                foreach (var ball in balls)
+                {
+                    if (!string.IsNullOrEmpty(ball))
+                    {
+                        int.TryParse(ball, out int result);
+                        if (result % 2 == 0)
+                        {
+                            odd++;
+                        }
+                        else
+                        {
+                            even++;
+                        }
+                    }
+                }
+
+                //Odd and Even
+                var oldOddEven = oddEvenList.Where(x => x.Item1.Equals($"{odd}/{even}")).FirstOrDefault();
+                if (oldOddEven != null)
+                {
+                    var newLine = new Tuple<string, int>(oldOddEven.Item1, oldOddEven.Item2 + 1);
+                    oddEvenList.Remove(oldOddEven);
+                    oddEvenList.Add(newLine);
+                }
+                else
+                {
+                    oddEvenList.Add(new Tuple<string, int>($"{odd}/{even}", 1));
+                }
+            }
+
+            string summary = $"***** IMPAR/PAR *****{Environment.NewLine}";
+
+            foreach (var line in oddEvenList.OrderByDescending(x => x.Item2).ToList())
+            {
+                summary = $"{summary}Impar/Par {line.Item1} = {line.Item2}{Environment.NewLine}";
             }
 
             return summary;

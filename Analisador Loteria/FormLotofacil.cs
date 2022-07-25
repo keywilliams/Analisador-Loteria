@@ -41,19 +41,34 @@ namespace Analisador_Loteria
             var quantitySummary = Lotofacil.Lotofacil.QuantityAnalysis(allLines);
 
             //Line
-            var lineSummary = Lotofacil.Lotofacil.LineAnalysis(allLines);
+            string lineSummary = string.Empty;
+            if (cbLine.Checked)
+                lineSummary = Lotofacil.Lotofacil.LineAnalysis(allLines);
 
             //Column
-            var columnSummary = Lotofacil.Lotofacil.ColumnAnalysis(allLines);
+            string columnSummary = string.Empty;
+            if (cbColumn.Checked)
+                columnSummary = Lotofacil.Lotofacil.ColumnAnalysis(allLines);
 
             //Sum
-            var sumSummary = Lotofacil.Lotofacil.SumAnalysis(allLines);
+            string sumSummary = string.Empty;
+            if (cbSum.Checked)
+                sumSummary = Lotofacil.Lotofacil.SumAnalysis(allLines);
 
             //Position
-            var positionSummary = Lotofacil.Lotofacil.PositionAnalysis(allLines);
+            string positionSummary = string.Empty;
+            if (cbPosition.Checked)
+                positionSummary = Lotofacil.Lotofacil.PositionAnalysis(allLines);
 
             //Position
-            var primeNumberSummary = Lotofacil.Lotofacil.PrimeNumberAnalysis(allLines);
+            string primeNumberSummary = string.Empty;
+            if (cbPrimeNumber.Checked)
+                primeNumberSummary = Lotofacil.Lotofacil.PrimeNumberAnalysis(allLines);
+
+            //Odd and Even
+            string oddEvenSummary = string.Empty;
+            if (cbOddEven.Checked)
+                oddEvenSummary = Lotofacil.Lotofacil.OddEvenAnalysis(allLines);
 
             FormSummary formSummary = new FormSummary();
             formSummary.TextBoxSummary = $"TOTAL DE JOGOS: {allLines.Length}{Environment.NewLine}" +
@@ -62,7 +77,8 @@ namespace Analisador_Loteria
                                          $"{columnSummary}{Environment.NewLine}" +
                                          $"{sumSummary}{Environment.NewLine}" +
                                          $"{positionSummary}{Environment.NewLine}" +
-                                         $"{primeNumberSummary}";
+                                         $"{primeNumberSummary}{Environment.NewLine}" +
+                                         $"{oddEvenSummary}";
             formSummary.ShowDialog();
         }
 
@@ -87,6 +103,21 @@ namespace Analisador_Loteria
 
                 MessageBox.Show(ex.Message, "Mensagem", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void cbTodos_CheckedChanged(object sender, EventArgs e)
+        {
+            cbLine.Checked = cbTodos.Checked;
+            cbColumn.Checked = cbTodos.Checked;
+            cbSum.Checked = cbTodos.Checked;
+            cbPosition.Checked = cbTodos.Checked;
+            cbPrimeNumber.Checked = cbTodos.Checked;
+            cbOddEven.Checked = cbTodos.Checked;
+            cbNormal.Checked = cbTodos.Checked;
+            cbInvertido.Checked = cbTodos.Checked;
+            cbDuplicado.Checked = cbTodos.Checked;
+            cbMetodo65.Checked = cbTodos.Checked;
+            cbFinais.Checked = cbTodos.Checked;
         }
     }
 }
