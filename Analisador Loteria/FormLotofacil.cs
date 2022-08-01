@@ -37,48 +37,97 @@ namespace Analisador_Loteria
         {
             var allLines = txtFechamentos.Text.Split(new[] { "\n" }, StringSplitOptions.None);
 
+            FormSummary formSummary = new FormSummary();
+            formSummary.TextBoxSummary = $"TOTAL DE JOGOS: {allLines.Length}{Environment.NewLine}";
+
             //Quantity
             var quantitySummary = Lotofacil.Lotofacil.QuantityAnalysis(allLines);
+            formSummary.TextBoxSummary += $"{quantitySummary}{Environment.NewLine}";
 
             //Line
-            string lineSummary = string.Empty;
             if (cbLine.Checked)
-                lineSummary = Lotofacil.Lotofacil.LineAnalysis(allLines);
+            {
+                var lineSummary = Lotofacil.Lotofacil.LineAnalysis(allLines);
+                formSummary.TextBoxSummary += $"{lineSummary}{Environment.NewLine}";
+            }
 
             //Column
-            string columnSummary = string.Empty;
             if (cbColumn.Checked)
-                columnSummary = Lotofacil.Lotofacil.ColumnAnalysis(allLines);
+            {
+                var columnSummary = Lotofacil.Lotofacil.ColumnAnalysis(allLines);
+                formSummary.TextBoxSummary += $"{columnSummary}{Environment.NewLine}";
+            }
 
             //Sum
-            string sumSummary = string.Empty;
             if (cbSum.Checked)
-                sumSummary = Lotofacil.Lotofacil.SumAnalysis(allLines);
+            {
+                var sumSummary = Lotofacil.Lotofacil.SumAnalysis(allLines);
+                formSummary.TextBoxSummary += $"{sumSummary}{Environment.NewLine}";
+            }
 
             //Position
-            string positionSummary = string.Empty;
             if (cbPosition.Checked)
-                positionSummary = Lotofacil.Lotofacil.PositionAnalysis(allLines);
+            {
+                var positionSummary = Lotofacil.Lotofacil.PositionAnalysis(allLines);
+                formSummary.TextBoxSummary += $"{positionSummary}{Environment.NewLine}";
+            }
 
             //Position
-            string primeNumberSummary = string.Empty;
             if (cbPrimeNumber.Checked)
-                primeNumberSummary = Lotofacil.Lotofacil.PrimeNumberAnalysis(allLines);
+            {
+                var primeNumberSummary = Lotofacil.Lotofacil.PrimeNumberAnalysis(allLines);
+                formSummary.TextBoxSummary += $"{primeNumberSummary}{Environment.NewLine}";
+            }
 
             //Odd and Even
-            string oddEvenSummary = string.Empty;
             if (cbOddEven.Checked)
-                oddEvenSummary = Lotofacil.Lotofacil.OddEvenAnalysis(allLines);
+            {
+                var oddEvenSummary = Lotofacil.Lotofacil.OddEvenAnalysis(allLines);
+                formSummary.TextBoxSummary += $"{oddEvenSummary}{Environment.NewLine}";
+            }
 
-            FormSummary formSummary = new FormSummary();
-            formSummary.TextBoxSummary = $"TOTAL DE JOGOS: {allLines.Length}{Environment.NewLine}" +
-                                         $"{quantitySummary}{Environment.NewLine}" +
-                                         $"{lineSummary}{Environment.NewLine}" +
-                                         $"{columnSummary}{Environment.NewLine}" +
-                                         $"{sumSummary}{Environment.NewLine}" +
-                                         $"{positionSummary}{Environment.NewLine}" +
-                                         $"{primeNumberSummary}{Environment.NewLine}" +
-                                         $"{oddEvenSummary}";
+            //Group Of 2
+            if (cbGroup2.Checked)
+            {
+                var groupOf2Summary = Lotofacil.Lotofacil.GroupOf2Analysis(allLines);
+                formSummary.TextBoxSummary += $"{groupOf2Summary}{Environment.NewLine}";
+            }
+
+            //Group Of 3
+            if (cbGroup3.Checked)
+            {
+                var groupOf3Summary = Lotofacil.Lotofacil.GroupOf3Analysis(allLines);
+                formSummary.TextBoxSummary += $"{groupOf3Summary}{Environment.NewLine}";
+            }
+
+            //Group Of 4
+            if (cbGroup4.Checked)
+            {
+                var groupOf4Summary = Lotofacil.Lotofacil.GroupOf4Analysis(allLines);
+                formSummary.TextBoxSummary += $"{groupOf4Summary}{Environment.NewLine}";
+            }
+
+            //Group Of 5
+            if (cbGroup5.Checked)
+            {
+                var groupOf5Summary = Lotofacil.Lotofacil.GroupOf5Analysis(allLines);
+                formSummary.TextBoxSummary += $"{groupOf5Summary}{Environment.NewLine}";
+            }
+
+            //Group Of 6
+            if (cbGroup6.Checked)
+            {
+                var groupOf6Summary = Lotofacil.Lotofacil.GroupOf6Analysis(allLines);
+                formSummary.TextBoxSummary += $"{groupOf6Summary}{Environment.NewLine}";
+            }
+
+            //Group Of 7
+            if (cbGroup7.Checked)
+            {
+                var groupOf7Summary = Lotofacil.Lotofacil.GroupOf7Analysis(allLines);
+                formSummary.TextBoxSummary += $"{groupOf7Summary}{Environment.NewLine}";
+            }
+
             formSummary.ShowDialog();
         }
 
@@ -116,8 +165,12 @@ namespace Analisador_Loteria
             cbNormal.Checked = cbTodos.Checked;
             cbInvertido.Checked = cbTodos.Checked;
             cbDuplicado.Checked = cbTodos.Checked;
-            cbMetodo65.Checked = cbTodos.Checked;
-            cbFinais.Checked = cbTodos.Checked;
+            cbGroup2.Checked = cbTodos.Checked;
+            cbGroup3.Checked = cbTodos.Checked;
+            cbGroup4.Checked = cbTodos.Checked;
+            cbGroup5.Checked = cbTodos.Checked;
+            cbGroup6.Checked = cbTodos.Checked;
+            cbGroup7.Checked = cbTodos.Checked;
         }
     }
 }

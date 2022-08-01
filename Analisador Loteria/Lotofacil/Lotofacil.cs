@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Analisador_Loteria.Lotofacil
 {
     public static class Lotofacil
     {
+        //public static int MyProperty { get; set; }
+        public static string[] allValues = new string[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25" };
+        public static int length { get; } = allValues.Length;
+
         public static string QuantityAnalysis(string[] allLines)
         {
             var quantityList = new List<Tuple<string, int>>();
@@ -265,8 +270,8 @@ namespace Analisador_Loteria.Lotofacil
 
         public static string PositionAnalysis(string[] allLines)
         {
-            var positionList = new List<Tuple<string, int, int>>();
-            var numberPositions = new Dictionary<string, List<int>>();
+            var positionList = new List<Tuple<int, string, int>>();
+            var numberPositions = new Dictionary<int, List<string>>();
 
             foreach (var line in allLines)
             {
@@ -275,17 +280,17 @@ namespace Analisador_Loteria.Lotofacil
                 int counter = 1;
                 foreach (var ball in balls)
                 {
-                    var has = numberPositions.ContainsKey(ball);
+                    var has = numberPositions.ContainsKey(counter);
                     if (has)
                     {
-                        var old = numberPositions[ball];
-                        numberPositions.Remove(ball);
-                        old.Add(counter);
-                        numberPositions.Add(ball, old);
+                        var old = numberPositions[counter];
+                        numberPositions.Remove(counter);
+                        old.Add(ball);
+                        numberPositions.Add(counter, old);
                     }
                     else
                     {
-                        numberPositions.Add(ball, new List<int> { counter });
+                        numberPositions.Add(counter, new List<string> { ball });
                     }
 
                     counter++;
@@ -296,7 +301,7 @@ namespace Analisador_Loteria.Lotofacil
             {
                 foreach (var position in positions.Value.Distinct())
                 {
-                    positionList.Add(new Tuple<string, int, int>(positions.Key, position, positions.Value.Count(x => x == position)));
+                    positionList.Add(new Tuple<int, string, int>(positions.Key, position, positions.Value.Count(x => x == position)));
                 }
             }
 
@@ -304,7 +309,7 @@ namespace Analisador_Loteria.Lotofacil
 
             foreach (var line in positionList.OrderByDescending(x => x.Item1).ThenBy(c => c.Item2).ToList())
             {
-                summary = $"{summary}Número {line.Item1} - Posição {line.Item2} = {line.Item3}{Environment.NewLine}";
+                summary = $"{summary}Posição {line.Item1} - Número {line.Item2} = {line.Item3}{Environment.NewLine}";
             }
 
             return summary;
@@ -323,7 +328,7 @@ namespace Analisador_Loteria.Lotofacil
             primeNumberList.Add(new Tuple<string, int>("7", 0));
             primeNumberList.Add(new Tuple<string, int>("8", 0));
             primeNumberList.Add(new Tuple<string, int>("9", 0));
-            var primeNumberArray = new List<string> { "2", "3", "5", "7", "11", "13", "17", "19", "23" };
+            var primeNumberArray = new List<string> { "02", "03", "05", "07", "11", "13", "17", "19", "23" };
 
             foreach (var line in allLines)
             {
@@ -408,6 +413,294 @@ namespace Analisador_Loteria.Lotofacil
             }
 
             return summary;
+        }
+
+        public static string GroupOf2Analysis(string[] allLines)
+        {
+            var groupList = new List<Tuple<string, int>>();
+
+            var groupOf2 = GenerateGroupOfTwo();
+
+            Parallel.ForEach(groupOf2, group =>
+            {
+                var list = allLines.Where(line => line.Contains(group[0]));
+                list = list.Where(line => line.Contains(group[1]));
+                int quantity = list.Count();
+                string key = $"{group[0]} {group[1]}";
+                groupList.Add(new Tuple<string, int>(key, quantity));
+            });
+
+            string summary = $"***** Grupo de 2 *****{Environment.NewLine}";
+
+            foreach (var line in groupList.OrderByDescending(x => x.Item2).ToList())
+            {
+                summary = $"{summary}{line.Item1} = {line.Item2}{Environment.NewLine}";
+            }
+
+            return summary;
+        }
+
+        public static string GroupOf3Analysis(string[] allLines)
+        {
+            var groupList = new List<Tuple<string, int>>();
+
+            var groupOf3 = GenerateGroupOfThree();
+
+            Parallel.ForEach(groupOf3, group =>
+            {
+                var list = allLines.Where(line => line.Contains(group[0]));
+                list = list.Where(line => line.Contains(group[1]));
+                list = list.Where(line => line.Contains(group[2]));
+                int quantity = list.Count();
+                string key = $"{group[0]} {group[1]} {group[2]}";
+                groupList.Add(new Tuple<string, int>(key, quantity));
+            });
+
+            string summary = $"***** Grupo de 3 *****{Environment.NewLine}";
+
+            foreach (var line in groupList.OrderByDescending(x => x.Item2).ToList())
+            {
+                summary = $"{summary}{line.Item1} = {line.Item2}{Environment.NewLine}";
+            }
+
+            return summary;
+        }
+
+        public static string GroupOf4Analysis(string[] allLines)
+        {
+            var groupList = new List<Tuple<string, int>>();
+
+            var groupOf4 = GenerateGroupOfFour();
+
+            Parallel.ForEach(groupOf4, group =>
+            {
+                var list = allLines.Where(line => line.Contains(group[0]));
+                list = list.Where(line => line.Contains(group[1]));
+                list = list.Where(line => line.Contains(group[2]));
+                list = list.Where(line => line.Contains(group[3]));
+                int quantity = list.Count();
+                string key = $"{group[0]} {group[1]} {group[2]} {group[3]}";
+                groupList.Add(new Tuple<string, int>(key, quantity));
+            });
+
+            string summary = $"***** Grupo de 4 *****{Environment.NewLine}";
+
+            foreach (var line in groupList.OrderByDescending(x => x.Item2).ToList())
+            {
+                summary = $"{summary}{line.Item1} = {line.Item2}{Environment.NewLine}";
+            }
+
+            return summary;
+        }
+
+        public static string GroupOf5Analysis(string[] allLines)
+        {
+            var groupList = new List<Tuple<string, int>>();
+
+            var groupOf5 = GenerateGroupOfFive();
+
+            Parallel.ForEach(groupOf5, group =>
+            {
+                var list = allLines.Where(line => line.Contains(group[0]));
+                list = list.Where(line => line.Contains(group[1]));
+                list = list.Where(line => line.Contains(group[2]));
+                list = list.Where(line => line.Contains(group[3]));
+                list = list.Where(line => line.Contains(group[4]));
+                int quantity = list.Count();
+                string key = $"{group[0]} {group[1]} {group[2]} {group[3]} {group[4]}";
+                groupList.Add(new Tuple<string, int>(key, quantity));
+            });
+
+            string summary = $"***** Grupo de 5 *****{Environment.NewLine}";
+
+            foreach (var line in groupList.OrderByDescending(x => x.Item2).ToList())
+            {
+                summary = $"{summary}{line.Item1} = {line.Item2}{Environment.NewLine}";
+            }
+
+            return summary;
+        }
+
+        public static string GroupOf6Analysis(string[] allLines)
+        {
+            var groupList = new List<Tuple<string, int>>();
+
+            var groupOf6 = GenerateGroupOfSix();
+
+            Parallel.ForEach(groupOf6, group =>
+            {
+                var list = allLines.Where(line => line.Contains(group[0]));
+                list = list.Where(line => line.Contains(group[1]));
+                list = list.Where(line => line.Contains(group[2]));
+                list = list.Where(line => line.Contains(group[3]));
+                list = list.Where(line => line.Contains(group[4]));
+                list = list.Where(line => line.Contains(group[5]));
+                int quantity = list.Count();
+                string key = $"{group[0]} {group[1]} {group[2]} {group[3]} {group[4]} {group[5]}";
+                groupList.Add(new Tuple<string, int>(key, quantity));
+            });
+
+            string summary = $"***** Grupo de 6 *****{Environment.NewLine}";
+
+            foreach (var line in groupList.OrderByDescending(x => x.Item2).ToList())
+            {
+                summary = $"{summary}{line.Item1} = {line.Item2}{Environment.NewLine}";
+            }
+
+            return summary;
+        }
+
+        public static string GroupOf7Analysis(string[] allLines)
+        {
+            var groupList = new List<Tuple<string, int>>();
+
+            var groupOf7 = GenerateGroupOfSeven();
+
+            Parallel.ForEach(groupOf7, group =>
+            {
+                var list = allLines.Where(line => line.Contains(group[0]));
+                list = list.Where(line => line.Contains(group[1]));
+                list = list.Where(line => line.Contains(group[2]));
+                list = list.Where(line => line.Contains(group[3]));
+                list = list.Where(line => line.Contains(group[4]));
+                list = list.Where(line => line.Contains(group[5]));
+                list = list.Where(line => line.Contains(group[6]));
+                int quantity = list.Count();
+                string key = $"{group[0]} {group[1]} {group[2]} {group[3]} {group[4]} {group[5]} {group[6]}";
+                groupList.Add(new Tuple<string, int>(key, quantity));
+            });
+
+            string summary = $"***** Grupo de 7 *****{Environment.NewLine}";
+
+            foreach (var line in groupList.OrderByDescending(x => x.Item2).ToList())
+            {
+                summary = $"{summary}Grupo {line.Item1} = {line.Item2}{Environment.NewLine}";
+            }
+
+            return summary;
+        }
+
+        private static List<string[]> GenerateGroupOfTwo()
+        {
+            var result = new List<string[]>();
+            for (int a = 0; a < length; a++)
+            {
+                for (int b = a + 1; b < length; b++)
+                {
+                    result.Add(new string[] { allValues[a], allValues[b] });
+                }
+            }
+            return result;
+        }
+
+        private static List<string[]> GenerateGroupOfThree()
+        {
+            var result = new List<string[]>();
+            for (int a = 0; a < length; a++)
+            {
+                for (int b = a + 1; b < length; b++)
+                {
+                    for (int c = b + 1; c < length; c++)
+                    {
+                        result.Add(new string[] { allValues[a], allValues[b], allValues[c] });
+                    }
+                }
+            }
+            return result;
+        }
+
+        private static List<string[]> GenerateGroupOfFour()
+        {
+            var result = new List<string[]>();
+            for (int a = 0; a < length; a++)
+            {
+                for (int b = a + 1; b < length; b++)
+                {
+                    for (int c = b + 1; c < length; c++)
+                    {
+                        for (int d = c + 1; d < length; d++)
+                        {
+                            result.Add(new string[] { allValues[a], allValues[b], allValues[c], allValues[d] });
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+
+        private static List<string[]> GenerateGroupOfFive()
+        {
+            var result = new List<string[]>();
+            for (int a = 0; a < length; a++)
+            {
+                for (int b = a + 1; b < length; b++)
+                {
+                    for (int c = b + 1; c < length; c++)
+                    {
+                        for (int d = c + 1; d < length; d++)
+                        {
+                            for (int e = d + 1; e < length; e++)
+                            {
+                                result.Add(new string[] { allValues[a], allValues[b], allValues[c], allValues[d], allValues[e] });
+                            }
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+
+        private static List<string[]> GenerateGroupOfSix()
+        {
+            var result = new List<string[]>();
+            for (int a = 0; a < length; a++)
+            {
+                for (int b = a + 1; b < length; b++)
+                {
+                    for (int c = b + 1; c < length; c++)
+                    {
+                        for (int d = c + 1; d < length; d++)
+                        {
+                            for (int e = d + 1; e < length; e++)
+                            {
+                                for (int f = e + 1; f < length; f++)
+                                {
+                                    result.Add(new string[] { allValues[a], allValues[b], allValues[c], allValues[d], allValues[e], allValues[f] });
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+
+        private static List<string[]> GenerateGroupOfSeven()
+        {
+            var result = new List<string[]>();
+            for (int a = 0; a < length; a++)
+            {
+                for (int b = a + 1; b < length; b++)
+                {
+                    for (int c = b + 1; c < length; c++)
+                    {
+                        for (int d = c + 1; d < length; d++)
+                        {
+                            for (int e = d + 1; e < length; e++)
+                            {
+                                for (int f = e + 1; f < length; f++)
+                                {
+                                    for (int g = f + 1; g < length; g++)
+                                    {
+                                        result.Add(new string[] { allValues[a], allValues[b], allValues[c], allValues[d], allValues[e], allValues[f], allValues[g] });
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return result;
         }
     }
 }
