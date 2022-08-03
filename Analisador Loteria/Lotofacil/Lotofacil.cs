@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -417,7 +418,7 @@ namespace Analisador_Loteria.Lotofacil
 
         public static string GroupOf2Analysis(string[] allLines)
         {
-            var groupList = new List<Tuple<string, int>>();
+            var groupList = new ConcurrentBag<Tuple<string, int>>();
 
             var groupOf2 = GenerateGroupOfTwo();
 
@@ -442,7 +443,7 @@ namespace Analisador_Loteria.Lotofacil
 
         public static string GroupOf3Analysis(string[] allLines)
         {
-            var groupList = new List<Tuple<string, int>>();
+            var groupList = new ConcurrentBag<Tuple<string, int>>();
 
             var groupOf3 = GenerateGroupOfThree();
 
@@ -468,7 +469,7 @@ namespace Analisador_Loteria.Lotofacil
 
         public static string GroupOf4Analysis(string[] allLines)
         {
-            var groupList = new List<Tuple<string, int>>();
+            var groupList = new ConcurrentBag<Tuple<string, int>>();
 
             var groupOf4 = GenerateGroupOfFour();
 
@@ -495,11 +496,11 @@ namespace Analisador_Loteria.Lotofacil
 
         public static string GroupOf5Analysis(string[] allLines)
         {
-            var groupList = new List<Tuple<string, int>>();
+            var groupList = new ConcurrentBag<Tuple<string, int>>();
 
             var groupOf5 = GenerateGroupOfFive();
 
-            Parallel.ForEach(groupOf5, group =>
+            var parallelForEach = Parallel.ForEach(groupOf5, (group, state) =>
             {
                 var list = allLines.Where(line => line.Contains(group[0]));
                 list = list.Where(line => line.Contains(group[1]));
@@ -523,7 +524,7 @@ namespace Analisador_Loteria.Lotofacil
 
         public static string GroupOf6Analysis(string[] allLines)
         {
-            var groupList = new List<Tuple<string, int>>();
+            var groupList = new ConcurrentBag<Tuple<string, int>>();
 
             var groupOf6 = GenerateGroupOfSix();
 
@@ -552,7 +553,7 @@ namespace Analisador_Loteria.Lotofacil
 
         public static string GroupOf7Analysis(string[] allLines)
         {
-            var groupList = new List<Tuple<string, int>>();
+            var groupList = new ConcurrentBag<Tuple<string, int>>();
 
             var groupOf7 = GenerateGroupOfSeven();
 
